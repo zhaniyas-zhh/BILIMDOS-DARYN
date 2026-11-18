@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="kk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BILIMDOS</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1F4B;--blue:#2563EB;--cyan:#67E8F9;--bg:#F4F6FA;--card:#fff;--tx:#1F2430;--mut:#5d6679;--ln:#dfe4ee;--ok:#3FAE7A;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1220;--card:#141c30;--tx:#e8ecf5;--mut:#9aa5bd;--ln:#26314d;--navy:#cfe0ff}}
+:root[data-theme="dark"]{--bg:#0c1220;--card:#141c30;--tx:#e8ecf5;--mut:#9aa5bd;--ln:#26314d;--navy:#cfe0ff}
+*{box-sizing:border-box}html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:16px/1.55 Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--ln)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+.bar{display:flex;align-items:center;gap:12px;padding:10px 16px;max-width:1100px;margin:auto}
+.logo{font-weight:800;font-size:20px;color:var(--navy);letter-spacing:-.5px;margin-right:auto;cursor:pointer}
+nav{display:flex;gap:4px;overflow-x:auto;padding:0 12px 8px;max-width:1100px;margin:auto;scrollbar-width:none}
+nav a{white-space:nowrap;padding:6px 12px;border-radius:6px;color:var(--mut);text-decoration:none;font-size:14px;font-weight:500;cursor:pointer}
+nav a.on{background:var(--navy);color:var(--bg)}
+button,.btn{font:inherit;font-weight:600;border:1px solid var(--ln);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:8px;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pri{background:var(--blue);border-color:var(--blue);color:#fff}.pri:hover{background:#1d4fc4}
+main{max-width:1100px;margin:auto;padding:20px 16px 60px}
+h1{font-size:clamp(34px,7vw,60px);line-height:1.05;letter-spacing:-1.5px;color:var(--navy);margin:0 0 14px;font-weight:800}
+h2{font-size:26px;letter-spacing:-.5px;color:var(--navy);margin:28px 0 10px}h3{margin:0 0 4px;font-size:17px}
+p{margin:0 0 10px;max-width:68ch}.mut{color:var(--mut);font-size:14px}
+.demo{display:inline-block;font-size:11px;font-weight:700;background:#fff3c4;color:#6b5200;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:14px}
+.hero{padding:28px 0 12px;display:grid;gap:24px}@media(min-width:800px){.hero{grid-template-columns:1.2fr 1fr;align-items:center}}
+.swap{background:var(--navy);color:#fff;border-radius:12px;padding:20px;display:grid;gap:10px}
+.swap div{background:rgba(255,255,255,.08);border-radius:8px;padding:10px 12px;font-size:14px}.swap b{color:var(--cyan)}
+.chip{display:inline-block;border:1px solid var(--ln);border-radius:99px;padding:3px 10px;font-size:13px;margin:2px 4px 2px 0;background:var(--card)}
+.chip.k{border-color:var(--blue);color:var(--blue)}.chip.l{border-color:var(--ok);color:var(--ok)}
+.tile{display:flex;justify-content:space-between;gap:8px;text-align:left;width:100%;font-weight:500}
+.tile.k{background:#e6efff;border-color:var(--blue);color:#0b3aa0}.tile.l{background:#e4f6ec;border-color:var(--ok);color:#14663f}
+input,select,textarea{font:inherit;padding:9px 12px;border:1px solid var(--ln);border-radius:8px;background:var(--card);color:var(--tx);width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.row>*{flex:1 1 150px}.row.fit>*{flex:0 0 auto}
+.tabs{display:flex;gap:6px;margin:10px 0}.tabs button.on{background:var(--navy);color:var(--bg);border-color:var(--navy)}
+.timer{font-size:clamp(54px,16vw,96px);font-weight:800;color:var(--navy);letter-spacing:-3px;font-variant-numeric:tabular-nums}
+.bg{position:fixed;inset:0;background:rgba(5,12,30,.6);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.bg.on{display:flex}
+.modal{background:var(--card);border-radius:12px;padding:20px;width:100%;max-width:400px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:var(--bg);padding:10px 16px;border-radius:8px;display:none;z-index:30;font-size:14px}
+.err{color:#b42318;font-size:13px;min-height:18px}.note{border-left:3px solid var(--blue);padding:6px 12px;background:var(--card);font-size:14px;margin:10px 0}
+</style></head><body>
+<header><div class="bar"><div class="logo" onclick="go('home')">BILIMDOS</div><button id="lg" class="pri" onclick="auth()">Онлайн кіру</button></div>
+<nav id="nav"></nav></header>
+<main id="v"></main>
+<div class="bg" id="bg"><div class="modal" id="md"></div></div><div id="toast"></div>
+<script>
+const D=[["Тілдер және әдебиет","Қазақ тілі және әдебиеті","Русский язык и литература","Ағылшын тілі","Неміс тілі","Қытай тілі","Түрік тілі","Сөйлеу және коммуникация"],
+["Тарих және қоғам","Қазақстан тарихы","Дүниежүзі тарихы","Құқық негіздері","Қоғамтану","Саясаттану негіздері","Мәдениеттану"],
+["Математика және жаратылыстану","Алгебра","Геометрия","Физика","Химия","Биология","География","Астрономия","Экология","Статистика және ықтималдық","Қаржылық математика"],
+["IT және жасанды интеллект","Программалау","Веб-әзірлеу","ЖИ-мен жұмыс","Робототехника","Киберқауіпсіздік негіздері","Деректерді талдау","Цифрлық сауаттылық"],
+["Дизайн және шығармашылық","Графикалық дизайн","UI/UX дизайн","Видеомонтаж","Фотография","Музыка және өнер"],
+["Практикалық және кәсіби дағдылар","Презентациямен жұмыс","Excel және Google Sheets","Жобаларды басқару","Кәсіпкерлік негіздері","Көпшілік алдында сөйлеу","Сыни ойлау","Медиасауаттылық","Уақытты басқару","Зерттеу және ғылыми жоба","Көшбасшылық және командалық жұмыс"]];
+const S=[];D.forEach(g=>g.slice(1).forEach(n=>S.push({id:S.length+1,n,c:g[0]})));
+const nm=id=>S[id-1].n, LV=["Beginner","Intermediate","Advanced","Ready to Teach"];
+let st={know:{},learn:[],hist:[],q:"",cat:"",mode:"k",fav:[],tab:"find"};
+try{Object.assign(st,JSON.parse(localStorage.getItem("bd")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("bd",JSON.stringify({know:st.know,learn:st.learn,hist:st.hist,fav:st.fav}))}catch(e){}};
+const $=s=>document.querySelector(s);
+function toast(t){const e=$("#toast");e.textContent=t;e.style.display="block";clearTimeout(e.t);e.t=setTimeout(()=>e.style.display="none",2600)}
+const PG=[["home","Басты бет"],["dirs","Бағыттар"],["find","Оқушыларды табу"],["share","Teach & Share"],["ypt","YPT Study"],["comm","Қауымдастық"],["rank","Рейтинг"],["prof","Менің профилім"]];
+function go(p){location.hash=p}
+function render(){const p=(location.hash.slice(1)||"home");const pg=PG.find(x=>x[0]===p)?p:"home";
+$("#nav").innerHTML=PG.map(x=>`<a tabindex=0 class="${x[0]===pg?"on":""}" onclick="go('${x[0]}')">${x[1]}</a>`).join("");
+$("#v").innerHTML=V[pg]();if(A[pg])A[pg]();window.scrollTo(0,0)}
+window.addEventListener("hashchange",()=>{if(tm&&location.hash!=="#ypt"){}render()});
+const chips=(a,c)=>a.map(i=>`<span class="chip ${c}">${nm(i)}</span>`).join("")||'<span class="mut">—</span>';
+const demoBadge='<span class="demo">DEMO DATA</span>';
+/* demo students */
+const P=[{u:"demo_aigerim",g:9,t:[14,24],l:[15,3],d:"Алгебраны түсіндіремін, ағылшынды жақсартқым келеді."},
+{u:"demo_nurlan",g:10,t:[15,3],l:[14,24],d:"Геометрия мен ағылшын тілінен көмектесемін."},
+{u:"demo_aruzhan",g:8,t:[31,36],l:[25,41],d:"Дизайн мен презентация бойынша бөлісемін."},
+{u:"demo_dias",g:11,t:[16,17],l:[22,44],d:"Физика, химия. Ғылыми жоба іздеймін."},
+{u:"demo_madina",g:10,t:[8,40],l:[3,26],d:"Тарих пен сөйлеу өнері."}];
+function match(p){const a=st.learn.filter(x=>p.t.includes(x)),b=Object.keys(st.know).map(Number).filter(x=>p.l.includes(x));return{a,b,s:a.length+b.length,mutual:a.length&&b.length}}
+const V={
+home:()=>`<section class="hero"><div><h1>Білімді бөліс. Бірге дамы.</h1><p>BILIMDOS — оқушылардың бір-біріне үйретіп, бірге үйреніп, білім мен тәжірибе алмасуына арналған заманауи білім экожүйесі.</p><div class="row fit"><button class="pri" onclick="go('find')">Оқушыларды табу</button><button onclick="go('dirs')">Платформаны зерттеу</button></div><p class="mut">Learn Together. Teach Each Other.</p></div>
+<div class="swap"><div><b>Аружан</b> Алгебраны біледі → Геометрияны үйренгісі келеді</div><div><b>Нұрлан</b> Геометрияны біледі → Алгебраны үйренгісі келеді</div><div>Екеуі де бірін-бірі үйретеді ${demoBadge}</div></div></section>
+<h2>Қалай жұмыс істейді</h2><div class="grid"><div class="card"><h3>1. Өзің білетінді таңда</h3><p class="mut">Басқаларға үйрете алатын пәндерді белгіле.</p></div><div class="card"><h3>2. Үйренгің келетінді таңда</h3><p class="mut">Жақсартқың келетін пәндерді таңда.</p></div><div class="card"><h3>3. Өзара білім алмас</h3><p class="mut">Сәйкес оқушыны тауып, сұраныс жібер.</p></div></div>
+<h2>Платформа сандары ${demoBadge}</h2><div class="grid"><div class="card"><h3>45</h3><span class="mut">білім бағыты</span></div><div class="card"><h3>6</h3><span class="mut">санат</span></div><div class="card"><h3>${st.hist.length}</h3><span class="mut">сенің оқу сессияларың (осы құрылғыда)</span></div></div>
+<div class="note">Нақты қолданушы саны жоқ: серверге қосылмағанша барлық профильдер мен статистика — демо.</div>`,
+dirs:()=>`<h2>Бағыттар</h2><p class="mut">Бұл — курстар емес, оқушыларды байланыстыратын білім санаттары.</p>
+<div class="tabs"><button id="mk" class="${st.mode=="k"?"on":""}" onclick="st.mode='k';render()">Мен не білемін?</button><button id="ml" class="${st.mode=="l"?"on":""}" onclick="st.mode='l';render()">Мен не үйренгім келеді?</button></div>
+<div class="row"><input id="q" placeholder="Пәнді іздеу" value="${st.q}"><select id="cat"><option value="">Барлық санат</option>${D.map(g=>`<option ${st.cat==g[0]?"selected":""}>${g[0]}</option>`).join("")}</select></div><div id="list"></div>`,
+find:()=>{const me=Object.keys(st.know).length||st.learn.length;
+const r=P.map(p=>({p,m:match(p)})).filter(x=>x.m.s>0).sort((a,b)=>b.m.s-a.m.s);
+return `<h2>Оқушыларды табу</h2><p>Сәйкестік сенің таңдауыңнан есептеледі. Профильдер — ${demoBadge}</p>`+(me?"":`<div class="note">Алдымен «Бағыттар» бетінде не білетініңді және не үйренгің келетінін белгіле.<br><button class="pri" style="margin-top:8px" onclick="go('dirs')">Бағыттарға өту</button></div>`)+
+`<div class="grid">${(me?r:P.map(p=>({p,m:match(p)}))).map(({p,m})=>`<div class="card"><h3>${p.u} ${demoBadge}</h3><div class="mut">${p.g}-сынып</div><p>${p.d}</p><div class="mut">Үйрете алады</div>${chips(p.t,"k")}<div class="mut">Үйренгісі келеді</div>${chips(p.l,"l")}
+${m.s?`<div class="note"><b>${m.mutual?"Өзара сәйкестік":"Ішінара сәйкестік"}</b><br>${m.a.length?"Ол сені үйретеді: "+m.a.map(nm).join(", ")+"<br>":""}${m.b.length?"Сен оны үйретесің: "+m.b.map(nm).join(", "):""}</div>`:""}
+<div class="row fit"><button onclick="toast('Демо-профиль: нақты профиль жоқ')">Профильді көру</button><button class="pri" onclick="needAuth('Сұраныс жіберу')">Үйрену сұранысын жіберу</button></div></div>`).join("")}</div>${me&&!r.length?'<p class="mut">Сәйкестік табылмады. Таңдауыңды өзгертіп көр.</p>':""}`},
+share:()=>`<h2>Teach & Share ${demoBadge}</h2><div class="row"><input id="sq" placeholder="Материалды іздеу"><select id="ss"><option value="">Барлық пән</option>${[3,14,24,31,36].map(i=>`<option value="${i}">${nm(i)}</option>`).join("")}</select></div><div class="row fit"><button class="pri" onclick="needAuth('Материал жариялау')">Материал жариялау</button></div><div class="grid" id="sl"></div>`,
+ypt:()=>`<h2>YPT Study</h2><div class="card"><div class="row"><select id="ys">${S.map(s=>`<option value="${s.id}">${s.n}</option>`).join("")}</select><select id="yd"><option value="25">25 минут</option><option value="45">45 минут</option><option value="60">60 минут</option><option value="1">1 минут (тест)</option></select></div><div class="timer" id="tm">25:00</div><div class="row fit"><button class="pri" id="ys1" onclick="tStart()">Бастау</button><button onclick="tFinish()">Аяқтау</button></div><p class="mut" style="margin-top:10px">Шынайы: веб-сайт басқа қолданбаларды бұғаттай алмайды. Бұл — назар аударуға арналған таймер.</p></div>
+<h2>Бүгінгі нәтиже</h2><div class="card" id="yh"></div><div class="note">Топтық бөлмелер мен рейтинг үшін сервер қажет (қазір қосылмаған).</div>`,
+comm:()=>`<h2>Қауымдастық ${demoBadge}</h2><div class="row fit"><button class="pri" onclick="needAuth('Сұрақ жариялау')">Сұрақ қою</button></div><div class="grid">${[["Алгебра","Квадрат теңдеуді тез шешудің жолы бар ма?",4],["Программалау","Python-ды қайдан бастаған жөн?",7],["Ағылшын тілі","Speaking клубына кім қосылады?",2]].map(x=>`<div class="card"><span class="chip">${x[0]}</span><h3>${x[1]}</h3><span class="mut">demo_user · ${x[2]} пікір</span><div class="row fit"><button onclick="needAuth('Пікір жазу')">Пікір жазу</button><button onclick="toast('Шағым демо-режимде сақталмайды')">Шағымдану</button></div></div>`).join("")}</div>`,
+rank:()=>`<h2>Рейтинг ${demoBadge}</h2><p>Нақты ұпайлар тек расталған әрекеттерден (көмек, алмасу, материал, топтық оқу) беріледі. Төмендегі тізім — үлгі.</p><div class="card">${P.map((p,i)=>`<div class="row" style="margin:4px 0"><span>${i+1}. ${p.u}</span><span class="mut">демо</span></div>`).join("")}</div><h2>Жетістіктер</h2>${["First Step","Helpful Student","Knowledge Sharer","Study Master","Team Player","Consistency Award"].map(a=>`<span class="chip">${a}</span>`).join("")}`,
+prof:()=>`<h2>Менің профилім</h2><div class="card"><p class="mut">Қонақ режимі: таңдаулар тек осы құрылғыда сақталады.</p><div class="mut">Мен білемін</div>${Object.keys(st.know).map(i=>`<span class="chip k">${nm(i)} · ${LV[st.know[i]]}</span>`).join("")||"—"}<div class="mut" style="margin-top:8px">Мен үйренгім келеді</div>${chips(st.learn,"l")}<div class="mut" style="margin-top:8px">Оқу сессиялары: ${st.hist.length}, барлығы ${st.hist.reduce((a,b)=>a+b.m,0)} мин</div><div class="row fit" style="margin-top:12px"><button onclick="go('dirs')">Таңдауды өзгерту</button><button class="pri" onclick="auth()">Онлайн кіру</button><button onclick="if(confirm('Барлық жергілікті деректі өшіру?')){st.know={};st.learn=[];st.hist=[];save();render()}">Деректі өшіру</button></div></div>`};
+function needAuth(w){toast(w+" үшін кіру керек");auth()}
+/* directions */
+function drawList(){const q=st.q.toLowerCase();const el=$("#list");if(!el)return;
+el.innerHTML=D.filter(g=>!st.cat||g[0]==st.cat).map(g=>{const it=S.filter(s=>s.c==g[0]&&s.n.toLowerCase().includes(q));return it.length?`<h3 style="margin-top:16px">${g[0]}</h3><div class="grid">${it.map(s=>{const k=s.id in st.know,l=st.learn.includes(s.id),on=st.mode=="k"?k:l;
+return `<div><button class="tile ${on?st.mode:""}" aria-pressed="${on}" onclick="tog(${s.id})"><span>${s.n}</span><span>${on?"✓":"+"}</span></button>${st.mode=="k"&&k?`<select onchange="st.know[${s.id}]=+this.value;save()" aria-label="Деңгей">${LV.map((v,i)=>`<option value="${i}" ${st.know[s.id]==i?"selected":""}>${v}</option>`).join("")}</select>`:""}</div>`}).join("")}</div>`:""}).join("")||'<p class="mut">Ештеңе табылмады.</p>'}
+function tog(id){if(st.mode=="k"){id in st.know?delete st.know[id]:st.know[id]=0}else{const i=st.learn.indexOf(id);i<0?st.learn.push(id):st.learn.splice(i,1)}save();drawList()}
+const R=[["Алгебра конспектісі","Конспект",14,"demo_aigerim"],["Python-ға кіріспе","Study guide",24,"demo_nurlan"],["Презентация шаблоны","Презентация",36,"demo_aruzhan"],["Ағылшын сөздік тізімі","Сілтеме",3,"demo_madina"]];
+function drawShare(){const q=($("#sq")||{}).value||"",s=($("#ss")||{}).value||"";
+$("#sl").innerHTML=R.filter(r=>r[0].toLowerCase().includes(q.toLowerCase())&&(!s||r[2]==s)).map((r,i)=>`<div class="card"><span class="chip">${r[1]}</span><h3>${r[0]}</h3><div class="mut">${nm(r[2])} · ${r[3]}</div><div class="row fit"><button onclick="needAuth('Таңдаулыға сақтау')">Сақтау</button><button onclick="needAuth('Лайк басу')">Лайк</button></div></div>`).join("")||'<p class="mut">Ештеңе табылмады.</p>'}
+const A={dirs(){drawList();$("#q").oninput=e=>{st.q=e.target.value;drawList()};$("#cat").onchange=e=>{st.cat=e.target.value;drawList()}},share(){drawShare();$("#sq").oninput=drawShare;$("#ss").onchange=drawShare},ypt(){drawYH();tShow()}};
+/* timer */
+let tm=null,left=0,total=0;
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+function tShow(){const e=$("#tm");if(e)e.textContent=tm?fmt(left):fmt(+$("#yd").value*60);const b=$("#ys1");if(b)b.textContent=tm?"Тоқтату":"Бастау"}
+function tStart(){if(tm){clearInterval(tm);tm=null;tShow();return}
+if(!left){total=left=+$("#yd").value*60}
+tm=setInterval(()=>{left--;const e=$("#tm");if(e)e.textContent=fmt(left);if(left<=0){tFinish(true)}},1000);tShow()}
+function tFinish(done){if(!total)return toast("Алдымен таймерді бастаңыз");clearInterval(tm);tm=null;const m=Math.round((total-left)/60);
+if(m>=1||done){st.hist.push({s:+($("#ys")||{value:1}).value,m:m||1,d:new Date().toDateString()});save();toast("Сессия сақталды: "+(m||1)+" мин")}else toast("1 минуттан аз — сақталмады");left=0;total=0;tShow();drawYH()}
+function drawYH(){const e=$("#yh");if(!e)return;const t=st.hist.filter(h=>h.d==new Date().toDateString());e.innerHTML=t.length?`<b>${t.reduce((a,b)=>a+b.m,0)} мин</b> бүгін<br>`+t.map(h=>`<div class="mut">${nm(h.s)} — ${h.m} мин</div>`).join(""):'<span class="mut">Бүгін сессия жоқ. Таймерді бастап көр.</span>'}
+/* auth */
+function closeM(){$("#bg").classList.remove("on")}
+$("#bg").onclick=e=>{if(e.target.id=="bg")closeM()};document.addEventListener("keydown",e=>{if(e.key=="Escape")closeM()});
+function auth(reg){$("#md").innerHTML=`<h3>${reg?"Тіркелу":"Онлайн кіру"}</h3><div class="tabs"><button class="${reg?"":"on"}" onclick="auth(0)">Кіру</button><button class="${reg?"on":""}" onclick="auth(1)">Тіркелу</button></div>
+<button style="width:100%" disabled title="Supabase қосылмаған">Google арқылы кіру (қолжетімсіз)</button><div class="row"><input id="em" type="email" placeholder="Email" autocomplete="email"><input id="pw" type="password" placeholder="Құпиясөз (кемінде 8)" autocomplete="${reg?"new-password":"current-password"}"></div><div class="err" id="er"></div>
+<div class="row fit"><button class="pri" onclick="sub(${reg?1:0})">${reg?"Тіркелу":"Кіру"}</button><button onclick="rec()">Құпиясөзді қалпына келтіру</button><button onclick="closeM()">Жабу</button></div><p class="mut">Сайтты тіркелусіз де толық пайдалана аласың.</p>`;$("#bg").classList.add("on")}
+function chk(pw){const e=$("#em").value.trim();if(!/^\S+@\S+\.\S+$/.test(e)){$("#er").textContent="Дұрыс email енгізіңіз";return 0}if(pw&&$("#pw").value.length<8){$("#er").textContent="Құпиясөз кемінде 8 таңба болуы керек";return 0}return 1}
+function sub(r){if(!chk(1))return;$("#er").textContent="Аутентификация сервері (Supabase) әлі қосылмаған — кіру/тіркелу қазір қолжетімсіз. Ештеңе сақталған жоқ."}
+function rec(){if(!chk(0))return;$("#er").textContent="Қалпына келтіру үшін сервер қосылуы керек — қазір қолжетімсіз."}
+render();
+</script></body></html>
